@@ -1,0 +1,42 @@
+﻿@model IEnumerable<PoliceEventTracker.Domain.Models.Event>
+
+@{
+    ViewData["Title"] = "DisplayLatestEvents";
+}
+
+<h1>50 senaste händelserna:</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

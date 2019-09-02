@@ -18,7 +18,7 @@ namespace PoliceEventTracker.Data.Models
 
         private PoliceEventDbContext context;
 
-        #region Add
+        #region Operations
         //Add items from api respons to db
         internal async Task<Update> AddItemsToDb(List<ApiEvent> apiItems, Update update)
         {
@@ -46,6 +46,20 @@ namespace PoliceEventTracker.Data.Models
             {
                 throw new Exception(e.Message);
             }
+        }
+        internal async void RemoveItem(int id)
+        {
+            var item = context.Events.FirstOrDefault(e => e.Id == id);
+
+            context.Events.Remove(item);
+
+            await context.SaveChangesAsync();
+        }
+        internal async void RemoveRange(List<Event> events)
+        {
+            context.RemoveRange(events);
+
+            await context.SaveChangesAsync();
         }
         internal Event CreateEvent(ApiEvent apiEvent, ApiLocation apiLocation, Location location)
         {
@@ -106,7 +120,6 @@ namespace PoliceEventTracker.Data.Models
         #endregion
 
         #region Get
-        //Get all events in db
         internal async Task<List<Event>> GetAllEvents()
         {
             return await context.Events

@@ -21,7 +21,7 @@ namespace PoliceEventTracker.Data.Migrations
 
             modelBuilder.Entity("PoliceEventTracker.Domain.Models.Event", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -31,7 +31,7 @@ namespace PoliceEventTracker.Data.Migrations
 
                     b.Property<int>("EventId");
 
-                    b.Property<long?>("LocationId");
+                    b.Property<int?>("LocationId");
 
                     b.Property<string>("Name");
 
@@ -54,7 +54,7 @@ namespace PoliceEventTracker.Data.Migrations
 
             modelBuilder.Entity("PoliceEventTracker.Domain.Models.Location", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 

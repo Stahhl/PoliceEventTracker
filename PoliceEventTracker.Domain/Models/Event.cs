@@ -6,7 +6,7 @@ namespace PoliceEventTracker.Domain.Models
 {
     public class Event
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         public int EventId { get; set; }
         public DateTime DateTime { get; set; }

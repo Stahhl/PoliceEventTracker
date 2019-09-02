@@ -20,13 +20,21 @@ namespace PoliceEventTracker.App.Controllers
         {
             var update = await dataAccess.UpdateDatabase();
 
-            return RedirectToAction(nameof(UpdateDatabaseResult), update);
+            //var errors = await dataAccess.RemoveAllErrors();
+
+            return RedirectToAction(nameof(Index));
         }
         public IActionResult UpdateDatabaseResult(Update update)
         {
             var eventsInUpdate = update.Events;
 
             return View(eventsInUpdate);
+        }
+        public async Task<IActionResult> Errors()
+        {
+            var errors = await dataAccess.RemoveAllErrors();
+
+            return RedirectToAction(nameof(Index));
         }
         public IActionResult Index()
         {

@@ -12,7 +12,7 @@ namespace PoliceEventTracker.Data.Migrations
                 name: "Locations",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
@@ -27,7 +27,8 @@ namespace PoliceEventTracker.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DateTime = table.Column<DateTime>(nullable: false)
+                    DateTime = table.Column<DateTime>(nullable: false),
+                    Count = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,7 +39,7 @@ namespace PoliceEventTracker.Data.Migrations
                 name: "Events",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EventId = table.Column<int>(nullable: false),
                     DateTime = table.Column<DateTime>(nullable: false),
@@ -47,7 +48,7 @@ namespace PoliceEventTracker.Data.Migrations
                     Url = table.Column<string>(nullable: true),
                     Type = table.Column<string>(nullable: true),
                     Coordinate = table.Column<string>(nullable: true),
-                    LocationId = table.Column<long>(nullable: true),
+                    LocationId = table.Column<int>(nullable: true),
                     UpdateId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

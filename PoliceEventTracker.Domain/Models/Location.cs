@@ -9,7 +9,7 @@ namespace PoliceEventTracker.Domain.Models
             Events = new List<Event>();
         }
 
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

@@ -10,8 +10,8 @@ using PoliceEventTracker.Data.Models;
 namespace PoliceEventTracker.Data.Migrations
 {
     [DbContext(typeof(PoliceEventDbContext))]
-    [Migration("20190902054557_updatecount")]
-    partial class updatecount
+    [Migration("20190902111407_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace PoliceEventTracker.Data.Migrations
 
             modelBuilder.Entity("PoliceEventTracker.Domain.Models.Event", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -33,7 +33,7 @@ namespace PoliceEventTracker.Data.Migrations
 
                     b.Property<int>("EventId");
 
-                    b.Property<long?>("LocationId");
+                    b.Property<int?>("LocationId");
 
                     b.Property<string>("Name");
 
@@ -56,7 +56,7 @@ namespace PoliceEventTracker.Data.Migrations
 
             modelBuilder.Entity("PoliceEventTracker.Domain.Models.Location", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 

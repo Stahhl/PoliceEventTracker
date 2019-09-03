@@ -52,6 +52,12 @@ namespace PoliceEventTracker.App.Controllers
 
             return View(e);
         }
+        public async Task<IActionResult> TopLocations()
+        {
+            var locations = await dataAccess.GetTopLocations();
+
+            return View(locations);
+        }
         public IActionResult Privacy()
         {
             return View();

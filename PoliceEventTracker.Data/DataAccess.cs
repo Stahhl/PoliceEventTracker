@@ -32,9 +32,8 @@ namespace PoliceEventTracker.Data
             //If null set it to 0
             var highestId = await GetHighestEventId();
 
-            //If event from api response has a later datetime than the latest one in the db
+            //If event from api response has a higher EventId than "highestId"
             //they are new ones and should be added to the db.
-            //DateTime.Compare -> https://docs.microsoft.com/en-us/dotnet/api/system.datetime.compare?view=netframework-4.8
             var eventsToAdd = apiEvents.Where(e => e.Id > highestId);
 
             if(eventsToAdd.Count() > 0)
@@ -50,19 +49,21 @@ namespace PoliceEventTracker.Data
 
             return update;
         }
+
+        #region Public operations
         public async Task<int> GetHighestEventId()
         {
-            int value = 0;
-
             var events = await dbAccess.GetAllEvents();
-            var e = events.OrderByDescending(x => x.EventId).First();
 
-            if(e != null)
-            {
-                value = e.EventId;
-            }
+            return events != null ? events.Max(e => e.EventId) : 0;
+        }
+        public async Task<List<Location>> GetTopLocations()
+        {
+            var locations = await dbAccess.GetAllLocations();
 
-            return value;
+            locations = locations.OrderByDescending(x => x.Events.Count).ToList();
+
+            return locations;
         }
         public async Task<Update> GetLatestUpdate()
         {
@@ -78,9 +79,7 @@ namespace PoliceEventTracker.Data
         }
         public async Task<Event> GetEventById(int id)
         {
-            var events = await dbAccess.GetAllEvents();
-
-            return events.FirstOrDefault(e => e.Id == id);
+            return await dbAccess.GetEventById(id);
         }
         public async Task<List<Event>> RemoveAllErrors()
         {
@@ -105,5 +104,6 @@ namespace PoliceEventTracker.Data
             dbAccess.RemoveRange(result);
             return result;
         }
+        #endregion
     }
 }

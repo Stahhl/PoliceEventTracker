@@ -120,17 +120,41 @@ namespace PoliceEventTracker.Data.Models
         #endregion
 
         #region Get
+        internal async Task<Event> GetEventById(int id)
+        {
+            return await context.Events
+                .Include(e => e.Location)
+                .FirstOrDefaultAsync(e => e.Id == id);
+        }
         internal async Task<List<Event>> GetAllEvents()
         {
             return await context.Events
                 .Include(e => e.Location)
                 .ToListAsync();
         }
+        internal async Task<Location> GetLocationById(int id)
+        {
+            return await context.Locations
+                .Include(l => l.Events)
+                .FirstOrDefaultAsync(l => l.Id == id);
+        }
         internal async Task<Location> GetLocationByName(string name)
         {
             return await context.Locations
                 .Include(l => l.Events)
                 .FirstOrDefaultAsync(l => l.Name.ToUpper() == name.ToUpper());
+        }
+        internal async Task<List<Location>> GetAllLocations()
+        {
+            return await context.Locations
+                .Include(l => l.Events)
+                .ToListAsync();
+        }
+        internal  async Task<Update> GetUpdateById(int id)
+        {
+            return await context.Updates
+                .Include(u => u.Events)
+                .FirstOrDefaultAsync(u => u.Id == id);
         }
         internal async Task<List<Update>> GetAllUpdates()
         {

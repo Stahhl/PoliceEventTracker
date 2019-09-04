@@ -1,3 +1,6 @@
+# Outdated
+New version: https://github.com/Stahhl/PoliceEventTrackerWeb
+
 # PoliceEventTracker
 Tracks events of the Swedish police using their API.
 
